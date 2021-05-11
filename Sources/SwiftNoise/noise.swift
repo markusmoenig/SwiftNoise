@@ -64,7 +64,7 @@ import Surge
 // @param scale Number of tiles, must be an integer for tileable results, range: [2, inf]
 // @param seed Seed to randomize result, range: [0, inf]
 // @return Value of the noise, range: [-1, 1]
-func noise(pos: SIMD2<Float>, scale: SIMD2<Float>, seed: Float) -> Float
+public func noise(pos: SIMD2<Float>, scale: SIMD2<Float>, seed: Float) -> Float
 {
     let _pos = [pos.x * scale.x, pos.y * scale.y]
     let _pos_floor = Surge.floor(_pos)

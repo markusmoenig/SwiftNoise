@@ -64,7 +64,7 @@ import Surge
 // @param scale Number of tiles, must be  integer for tileable results, range: [2, inf]
 // @param seed Seed to randomize result, range: [0, inf], default: 0.0
 // @return Value of the noise, range: [-1, 1]
-func gradientNoise(pos: SIMD2<Float>, scale: SIMD2<Float>, seed: Float) -> Float
+public func gradientNoise(pos: SIMD2<Float>, scale: SIMD2<Float>, seed: Float) -> Float
 {
     let _pos = [pos.x * scale.x, pos.y * scale.y]
 
