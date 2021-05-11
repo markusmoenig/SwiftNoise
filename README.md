@@ -2,6 +2,8 @@
 
 A library of tileable, procedural noise and pattern functions. Implemented in Swift and utilizes the [Surge Library](https://github.com/Jounce/Surge).
 
+Normally you would implement noise and similar functionality on the GPU, however in my specific use case, a heavily multi-threaded, permutative and recursive node system, a CPU implementation made more sense. Hope this Swift library is useful for others too.
+
 Based on [Procedural Tileable Shaders](https://github.com/tuxalin/procedural-tileable-shaders).
 
 ## Installation
