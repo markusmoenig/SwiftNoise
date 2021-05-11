@@ -1,5 +1,12 @@
+//
+//  interpolate.swift
+//  
+//
+//  Created by Markus Moenig on 11/5/21.
+//
 
-// Utilities
+import simd
+import Surge
 
 // Swift / Surge port by Markus Moenig
 
@@ -27,10 +34,6 @@
  SOFTWARE.
  */
 
-func _a2f4(_ a: [Float] ) -> SIMD4<Float> {
-    return SIMD4<Float>(a[0], a[1], a[2], a[3])
-}
-
 // Tileable noises based on https://github.com/tuxalin/procedural-tileable-shaders
 
 /*
@@ -56,3 +59,12 @@ func _a2f4(_ a: [Float] ) -> SIMD4<Float> {
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
+
+// the main noise interpolation function using a hermite polynomial
+func noiseInterpolate(_ x: SIMD2<Float>) -> SIMD2<Float>
+{
+    let x2 = x * x
+    let xx = x2 * x
+    let xxx = (x * (x * SIMD2<Float>(6.0,6.0) - SIMD2<Float>(15.0,15.0)) + SIMD2<Float>(10.0, 10.0))
+    return xx * xxx
+}

@@ -2,10 +2,7 @@
     @testable import SwiftNoise
 
     final class SwiftNoiseTests: XCTestCase {
-        func testExample() {
-            // This is an example of a functional test case.
-            // Use XCTAssert and related functions to verify your tests produce the correct
-            // results.
-            XCTAssertEqual(SwiftNoise().text, "Hello, World!")
+        func testValueNoise2D() {
+            XCTAssertEqual(noise(pos: SIMD2<Float>(0.5, 0.5), scale: SIMD2<Float>(2,2), seed: 1), 0.3163414)
         }
     }
