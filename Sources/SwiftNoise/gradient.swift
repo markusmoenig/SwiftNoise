@@ -87,7 +87,7 @@ public func gradientNoise(pos: SIMD2<Float>, scale: SIMD2<Float>, seed: Float) -
     
     //vec4 gradients = hashX * f.xzxz + hashY * f.yyww;
     var gradients = Surge.elmul([hashX.x, hashX.y, hashX.z, hashX.w], [f[0], f[2], f[0], f[2]])
-    gradients = Surge.add(gradients, Surge.elmul([hashY.y, hashY.y, hashY.w, hashY.w], [f[1], f[1], f[3], f[3]]))
+    gradients = Surge.add(gradients, Surge.elmul([hashY.x, hashY.y, hashY.z, hashY.w], [f[1], f[1], f[3], f[3]]))
     
     let u = noiseInterpolate(SIMD2<Float>(f[0], f[1]))
     //vec2 g = mix(gradients.xz, gradients.yw, u.x);
