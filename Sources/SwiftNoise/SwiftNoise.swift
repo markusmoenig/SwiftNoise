@@ -26,6 +26,9 @@
 
 public final class SwiftNoise {
     
+    /// public constructor
+    public init() {}
+    
     /// Utility function to convert a float array with 4 elements to a SIM4<Float>
     func _a2f4(_ a: [Float] ) -> SIMD4<Float> {
         return SIMD4<Float>(a[0], a[1], a[2], a[3])
