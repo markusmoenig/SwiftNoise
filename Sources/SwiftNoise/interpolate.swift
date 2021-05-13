@@ -60,11 +60,14 @@ import Surge
  SOFTWARE.
  */
 
-// the main noise interpolation function using a hermite polynomial
-func noiseInterpolate(_ x: SIMD2<Float>) -> SIMD2<Float>
-{
-    let x2 = x * x
-    let xx = x2 * x
-    let xxx = (x * (x * SIMD2<Float>(6.0,6.0) - SIMD2<Float>(15.0,15.0)) + SIMD2<Float>(10.0, 10.0))
-    return xx * xxx
+extension SwiftNoise {
+
+    // the main noise interpolation function using a hermite polynomial
+    func noiseInterpolate(_ x: SIMD2<Float>) -> SIMD2<Float>
+    {
+        let x2 = x * x
+        let xx = x2 * x
+        let xxx = (x * (x * SIMD2<Float>(6.0,6.0) - SIMD2<Float>(15.0,15.0)) + SIMD2<Float>(10.0, 10.0))
+        return xx * xxx
+    }
 }

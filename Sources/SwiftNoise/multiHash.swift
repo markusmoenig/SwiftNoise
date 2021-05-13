@@ -60,28 +60,31 @@ import Surge
  SOFTWARE.
  */
 
-// based on GPU Texture-Free Noise by Brian Sharpe: https://archive.is/Hn54S
-func permutePrepareMod289(_ x : SIMD3<Float>) -> SIMD3<Float> { return x - floor(x * (1.0 / 289.0)) * 289.0 }
-func permutePrepareMod289(_ x : SIMD4<Float>) -> SIMD4<Float> { return x - floor(x * (1.0 / 289.0)) * 289.0 }
-func permuteResolve(_ x : SIMD4<Float>) -> SIMD4<Float> { return fract( x * (7.0 / 288.0 )) }
-func permuteHashInternal(_ x : SIMD4<Float>) -> SIMD4<Float> { return fract(x * ((34.0 / 289.0) * x + (1.0 / 289.0))) * 289.0 }
+extension SwiftNoise {
+    
+    // based on GPU Texture-Free Noise by Brian Sharpe: https://archive.is/Hn54S
+    func permutePrepareMod289(_ x : SIMD3<Float>) -> SIMD3<Float> { return x - floor(x * (1.0 / 289.0)) * 289.0 }
+    func permutePrepareMod289(_ x : SIMD4<Float>) -> SIMD4<Float> { return x - floor(x * (1.0 / 289.0)) * 289.0 }
+    func permuteResolve(_ x : SIMD4<Float>) -> SIMD4<Float> { return fract( x * (7.0 / 288.0 )) }
+    func permuteHashInternal(_ x : SIMD4<Float>) -> SIMD4<Float> { return fract(x * ((34.0 / 289.0) * x + (1.0 / 289.0))) * 289.0 }
 
-// generates a random number for each of the 4 cell corners
-func permuteHash2D(_ cellIn: SIMD4<Float>) -> SIMD4<Float>
-{
-    let cell = permutePrepareMod289(cellIn * 32.0)
-    let c1 = SIMD4<Float>(cell.x, cell.z, cell.x, cell.z)//cell.xzxz
-    let c2 = SIMD4<Float>(cell.y, cell.y, cell.w, cell.w)//cell.yyww
-    return permuteResolve(permuteHashInternal(permuteHashInternal(c1) + c2));
-}
+    // generates a random number for each of the 4 cell corners
+    func permuteHash2D(_ cellIn: SIMD4<Float>) -> SIMD4<Float>
+    {
+        let cell = permutePrepareMod289(cellIn * 32.0)
+        let c1 = SIMD4<Float>(cell.x, cell.z, cell.x, cell.z)//cell.xzxz
+        let c2 = SIMD4<Float>(cell.y, cell.y, cell.w, cell.w)//cell.yyww
+        return permuteResolve(permuteHashInternal(permuteHashInternal(c1) + c2));
+    }
 
-// generates 2 random numbers for each of the 4 cell corners
-func permuteHash2D(_ cellIn: SIMD4<Float>,_ hashX: inout SIMD4<Float>,_ hashY: inout SIMD4<Float>)
-{
-    let cell = permutePrepareMod289(cellIn)
-    let c1 = SIMD4<Float>(cell.x, cell.z, cell.x, cell.z)//cell.xzxz
-    let c2 = SIMD4<Float>(cell.y, cell.y, cell.w, cell.w)//cell.yyww
-    hashX = permuteHashInternal(permuteHashInternal(c1) + c2)
-    hashY = permuteResolve(permuteHashInternal(hashX))
-    hashX = permuteResolve(hashX)
+    // generates 2 random numbers for each of the 4 cell corners
+    func permuteHash2D(_ cellIn: SIMD4<Float>,_ hashX: inout SIMD4<Float>,_ hashY: inout SIMD4<Float>)
+    {
+        let cell = permutePrepareMod289(cellIn)
+        let c1 = SIMD4<Float>(cell.x, cell.z, cell.x, cell.z)//cell.xzxz
+        let c2 = SIMD4<Float>(cell.y, cell.y, cell.w, cell.w)//cell.yyww
+        hashX = permuteHashInternal(permuteHashInternal(c1) + c2)
+        hashY = permuteResolve(permuteHashInternal(hashX))
+        hashX = permuteResolve(hashX)
+    }
 }
