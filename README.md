@@ -10,7 +10,9 @@ Based on [Procedural Tileable Shaders](https://github.com/tuxalin/procedural-til
 
 Simply add the url of this Git to your Swift Packages.
 
-## Current status
+## Usage
+
+All the functions listed below are member functions of the *SwiftNoise* class which you have to instantiate first. As these noises / patterns are tileable, only use the scale parameter to subdivide the noise into more tiles. Scaling the uv / pos parameter will not provide correct results.
 
 This library is work in progress, currently implemented functions are:
 
